@@ -1,7 +1,7 @@
 // src/services/authService.js
 import axios from 'axios';
-
-const API_URL = 'http://localhost:4000/api/auth';
+const BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:4000/api';
+const API_URL = `${BASE_URL}/auth`;
 
 // Registrar un nuevo usuario
 export const register = async (userData) => {

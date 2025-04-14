@@ -1,8 +1,7 @@
 // src/services/taskService.js
 import axios from 'axios';
-
-// Definir la URL base - asegurarse de que no tenga barra al final
-const API_URL = 'http://localhost:4000/api/tasks';
+const BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:4000/api';
+const API_URL = `${BASE_URL}/tasks`;
 
 // Configurar instancia de axios con interceptor para añadir token
 const taskApi = axios.create({

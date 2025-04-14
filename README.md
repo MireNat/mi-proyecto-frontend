@@ -1,70 +1,123 @@
-# Getting Started with Create React App
+# Instrucciones para el Proyecto Frontend de Gestor de Tareas
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Resumen del Proyecto
 
-## Available Scripts
+Este proyecto frontend en React implementa una interfaz de usuario para tu Gestor de Tareas que se conecta con tu backend existente en Node.js. La estructura sigue las especificaciones del proyecto y permite realizar todas las operaciones CRUD requeridas.
 
-In the project directory, you can run:
+## Estructura del Proyecto
 
-### `npm start`
+```
+/src
+  /components       # Componentes reutilizables
+  /pages            # Páginas principales
+  /context          # Context API para estado global
+  /services         # Servicios para conectar con el backend
+  App.js            # Componente principal
+  App.css           # Estilos globales
+  index.js          # Punto de entrada
+```
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Pasos para configurar y ejecutar el proyecto
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. **Crear el proyecto**
 
-### `npm test`
+```bash
+npx create-react-app task-manager-frontend
+cd task-manager-frontend
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. **Instalar dependencias**
 
-### `npm run build`
+```bash
+npm install axios react-router-dom
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+3. **Configurar las variables de entorno**
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Crea un archivo `.env` en la raíz del proyecto:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+REACT_APP_API_URL=http://localhost:4000/api
+```
 
-### `npm run eject`
+Si tu backend se ejecuta en un puerto diferente o tienes un dominio específico cuando se despliega, actualiza la URL en consecuencia.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+4. **Copiar los archivos del proyecto**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Copia todos los archivos proporcionados a la estructura correspondiente de tu proyecto.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+5. **Configurar CORS en el backend**
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+Asegúrate de que tu backend tenga CORS habilitado para permitir solicitudes desde tu frontend:
 
-## Learn More
+```javascript
+// En tu archivo principal del servidor (app.js o index.js)
+const cors = require('cors');
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+app.use(cors());
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+6. **Iniciar el proyecto**
 
-### Code Splitting
+```bash
+npm start
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+La aplicación debería iniciarse en [http://localhost:3000](http://localhost:3000)
 
-### Analyzing the Bundle Size
+## Configuración para producción
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Antes de desplegar el frontend, modifica las variables de entorno para usar la URL de producción de tu backend:
 
-### Making a Progressive Web App
+1. Crea un archivo `.env.production`:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```
+REACT_APP_API_URL=https://tu-backend-en-produccion.com/api
+```
 
-### Advanced Configuration
+2. Construye la aplicación para producción:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+```bash
+npm run build
+```
 
-### Deployment
+3. Despliega la carpeta `build` en Vercel u otro servicio:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Para Vercel, puedes instalar la CLI y ejecutar:
 
-### `npm run build` fails to minify
+```bash
+npm install -g vercel
+vercel login
+vercel
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Puntos a verificar antes de entregar
+
+1. **Funcionalidad completa de autenticación**:
+    - Registro de usuario
+    - Inicio de sesión
+    - Rutas protegidas
+
+2. **Gestión de tareas (CRUD)**:
+    - Crear tareas con todos los campos requeridos
+    - Visualizar la lista de tareas
+    - Editar tareas respetando las reglas de estado
+    - Eliminar tareas completadas
+
+3. **Filtrado y búsqueda**:
+    - Buscar tareas por título
+    - Filtrar por estado (pendiente, en progreso, completada)
+
+4. **Interfaz responsiva**:
+    - Verificar la visualización en diferentes dispositivos
+
+5. **Conexión con el backend**:
+    - Todas las operaciones CRUD se realizan correctamente
+    - Los tokens JWT se gestionan adecuadamente
+    - Manejo de errores apropiado
+
+## Notas adicionales
+
+- Este frontend está diseñado para trabajar con la API especificada en los requisitos del proyecto.
+- Asegúrate de que todos los endpoints en el backend correspondan con los utilizados en los servicios del frontend.
+- Para personalizar los estilos, puedes modificar el archivo `App.css` o implementar una solución de estilo diferente como Tailwind CSS o Styled Components.
